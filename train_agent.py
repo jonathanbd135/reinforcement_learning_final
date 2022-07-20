@@ -79,11 +79,13 @@ class Agent():
             next_actions = np.argmax(self.q_model.predict(observations_end), axis=1)
             ys = rewards + np.array(
                 [(self.discount_factor * self.target_model.predict(observations_end)[rows, next_actions.flatten()])]).T
+            qs_targets = self.q_model.predict(self.begining_states_history)
 
         # use dqn
         else:
             ys = rewards + np.array([self.discount_factor * np.max(self.target_model.predict(observations_end),
                                                               axis=1)]).T
+            qs_targets = qs.copy()
         if self.per:
             self.errors = (abs(ys.flatten() - qs[rows, np.array(self.actions.flatten(), dtype=int)])).flatten()
         else:
@@ -92,7 +94,8 @@ class Agent():
         if done:
             ys[-1, 0] = rewards[-1, 0]
 
-        qs_targets = self.Qs_history.copy()
+
+
         qs_targets[rows, np.array(self.actions, dtype=int).flatten()] = ys.flatten()
         if self.per:
             prorities = self.get_probabilities()
@@ -118,9 +121,15 @@ class Agent():
             observation = self.env.reset()
             expended_observation = np.expand_dims(observation, axis=0)
             for step in range(self.max_steps):  # need to config it in init so that max steps <= duration
-                self.begining_states_history = np.concatenate([self.begining_states_history, expended_observation])
+
+                # self.begining_states_history = np.concatenate([self.begining_states_history, expended_observation])
+                self.begining_states_history = np.concatenate([self.begining_states_history, np.ones(shape=expended_observation.shape)*step])
+
                 step_q = self.q_model.predict(expended_observation)
-                self.Qs_history = np.concatenate([self.Qs_history, step_q])
+
+                # self.Qs_history = np.concatenate([self.Qs_history, step_q])
+                self.Qs_history = np.concatenate([self.Qs_history, np.ones(shape=step_q.shape)*step])
+
                 q_flatten = np.matrix.flatten(step_q)
                 # soft epsilon
                 self.env.get_available_actions()
@@ -141,17 +150,27 @@ class Agent():
                 action = np.random.choice(np.arange(self.actions_number), p=prob)
                 observation_end, step_reward, step_done, _ = self.env.step(action)
                 expended_observation = np.expand_dims(observation_end, axis=0)
-                self.actions = np.concatenate([self.actions, np.expand_dims([action], axis=0)])
-                self.rewards_history = np.concatenate([self.rewards_history, np.expand_dims([step_reward], axis=0)])
+
+
+                # self.actions = np.concatenate([self.actions, np.expand_dims([action], axis=0)])
+                self.actions = np.concatenate([self.actions, np.ones(shape=np.expand_dims([action], axis=0).shape)*step])
+
+
+                # self.rewards_history = np.concatenate([self.rewards_history, np.expand_dims([step_reward], axis=0)])
+                self.rewards_history = np.concatenate([self.rewards_history, np.ones(shape=np.expand_dims([step_reward], axis=0).shape)*step])
 
                 current_reward += step_reward
 
+                # self.ending_states_history = np.concatenate(
+                #     [self.ending_states_history, np.expand_dims(observation_end, axis=0)])
                 self.ending_states_history = np.concatenate(
-                    [self.ending_states_history, np.expand_dims(observation_end, axis=0)])
+                    [self.ending_states_history,   np.ones(shape=np.expand_dims([observation_end] , axis=0).shape)*step])
+
                 self.fit_model(step_done)
 
                 models_counter += 1
-                self.target_model = keras.models.clone_model(self.q_model)
+                if models_counter % self.sync_models == 0:
+                    self.target_model = keras.models.clone_model(self.q_model)
 
                 if models_counter % 10 == 0:
                     if (self.epsilon * (1 + self.decay_factor)) < self.max_epsilon:
