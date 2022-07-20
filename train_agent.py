@@ -140,6 +140,7 @@ class Agent():
 
                 action = np.random.choice(np.arange(self.actions_number), p=prob)
                 observation_end, step_reward, step_done, _ = self.env.step(action)
+                expended_observation = np.expand_dims(observation_end, axis=0)
                 self.actions = np.concatenate([self.actions, np.expand_dims([action], axis=0)])
                 self.rewards_history = np.concatenate([self.rewards_history, np.expand_dims([step_reward], axis=0)])
 
