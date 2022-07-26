@@ -86,15 +86,15 @@ class Agent():
         observations_end = self.ending_states_history
         rows = np.arange(len(rewards))
         # use ddqn model
-        qs = self.q_model.predict(self.begining_states_history)
+        qs = self.q_model.predict(self.begining_states_history, verbose=0)
         if self.model_type == 'ddqn':
-            next_actions = np.argmax(self.q_model.predict(observations_end), axis=1)
+            next_actions = np.argmax(self.q_model.predict(observations_end, verbose=0), axis=1)
             ys = rewards + np.array(
-                [(self.discount_factor * self.target_model.predict(observations_end)[rows, next_actions.flatten()])]).T
-            qs_targets = self.q_model.predict(self.begining_states_history)
+                [(self.discount_factor * self.target_model.predict(observations_end, verbose=0)[rows, next_actions.flatten()])]).T
+            qs_targets = self.q_model.predict(self.begining_states_history, verbose=0)
         # use dqn
         else:
-            ys = rewards + np.array([self.discount_factor * np.max(self.target_model.predict(observations_end),
+            ys = rewards + np.array([self.discount_factor * np.max(self.target_model.predict(observations_end, verbose=0),
                                                                    axis=1)]).T
             qs_targets = qs.copy()
         if self.per:
@@ -144,12 +144,13 @@ class Agent():
         self.epsilon = epsilon
         for episode in range(episodes):
             sum_rewards = 0
-            print(f'STARTING TO FIT, episode: {len(self.steps_taken)}')
+            if (episode % 50 == 0):
+                print(f'STARTING TO FIT, episode: {len(self.steps_taken)}')
             observation = self.env.reset()
             expended_observation = np.expand_dims(observation, axis=0)
             for step in range(self.max_steps):  # need to config it in init so that max steps <= duration
                 self.begining_states_history = np.concatenate([self.begining_states_history, expended_observation])
-                step_q = self.q_model.predict(expended_observation)
+                step_q = self.q_model.predict(expended_observation, verbose=0)
                 self.Qs_history = np.concatenate([self.Qs_history, step_q])
                 q_flatten = np.matrix.flatten(step_q)
                 action = self.take_action(q_flatten)
@@ -191,7 +192,7 @@ class Agent():
                         [self.rewards_history_last, np.expand_dims([step_reward], axis=0)])
                     self.Qs_history_last = np.concatenate([self.Qs_history_last, step_q])
                     self.actions_last = np.concatenate([self.actions_last, np.expand_dims([action], axis=0)])
-                    print(f"episode ended in {step} steps")
+                    # print(f"episode ended in {step} steps")
                     self.steps_taken.append(step)
                     self.reward_eval.append(sum_rewards ** 2 * np.log(step))
                     break
