@@ -4,8 +4,7 @@ import numpy as np
 import pandas as pd
 
 if __name__ == '__main__':
-    episodes_to_learn = 1
-
+    episodes_to_learn = 200
 
     # ddqn_1=Agent(model_type='ddqn', betches_size=100, sync_models=50, per=True, env_number=1, is_stochastic=True)
     # ddqn_1.set_loger('huber_log_ddqn_1.csv')
@@ -26,7 +25,6 @@ if __name__ == '__main__':
     # dqn_1 = Agent(model_type='dqn', betches_size=100, sync_models=50, per=True, env_number=1, is_stochastic=True)
     # dqn_1.set_loger('huber_log_dqn_1.csv')
     # dqn_1.train_agent(episodes=1, epsilon=0.6, discount_factor=0.9)
-    # ddqn_1.q_model.save(r'C:\Users\HP\Desktop\Finale\reinforcement_learning_final\weights\ex1_w\dqn_1')
     # while (np.average(dqn_1.steps_taken[-5:]) < 50 and len(dqn_1.steps_taken) < episodes_to_learn):
     #     dqn_1.train_agent(episodes=5, epsilon=dqn_1.epsilon, discount_factor=dqn_1.discount_factor)
     # dqn_1.q_model.save(r'C:\Users\HP\Desktop\Finale\reinforcement_learning_final\weights\ex1_w\dqn_1')
@@ -40,106 +38,111 @@ if __name__ == '__main__':
     # np.savetxt("dqn_1_actions_taken.csv", dqn_1_actions_taken, delimiter=",")
     # dqn_1_reward_eval = np.array(dqn_1.reward_eval)
     # np.savetxt("dqn_1_reward_eval.csv", dqn_1_reward_eval, delimiter=",")
-    #
-    # ddqn_1=Agent(model_type='ddqn', betches_size=100, sync_models=50, per=False, env_number=1, is_stochastic=True)
-    # ddqn_1.set_loger('huber_log_ddqn_1_no_per.csv')
-    # ddqn_1.train_agent(episodes=1, epsilon=0.6, discount_factor=0.9)
-    # dqn_1.q_model.save(r'C:\Users\HP\Desktop\Finale\reinforcement_learning_final\weights\ex1_w\ddqn_1_no_per')
-    # while (np.average(ddqn_1.steps_taken[-5:]) < 50 and len(ddqn_1.steps_taken) < episodes_to_learn):
-    #     ddqn_1.train_agent(episodes=5, epsilon=ddqn_1.epsilon, discount_factor=ddqn_1.discount_factor)
-    # print(f'Total episodes: {len(ddqn_1.steps_taken)}')
-    # loss_ddqn_1 = np.flip(pd.read_csv('huber_log_ddqn_1_no_per.csv', delimiter=';').loss.to_numpy())
-    # quantile_95 = np.quantile(loss_ddqn_1, 0.95)
-    # loss_ddqn_1 = np.arange(len(loss_ddqn_1[np.where(loss_ddqn_1 < quantile_95)])), loss_ddqn_1[np.where(loss_ddqn_1 < quantile_95)]
-    # np.savetxt("loss_ddqn_1_no_per.csv", loss_ddqn_1, delimiter=",")
-    # ddqn_1_actions_taken = np.array(ddqn_1.steps_taken)
-    # np.savetxt("ddqn_1_actions_taken_no_per.csv", ddqn_1_actions_taken, delimiter=",")
-    # ddqn_1_reward_eval = np.array(ddqn_1.reward_eval)
-    # np.savetxt("ddqn_1_reward_eval_no_per.csv", ddqn_1_reward_eval, delimiter=",")
-    #
-    # dqn_1 = Agent(model_type='dqn', betches_size=100, sync_models=50, per=False, env_number=1, is_stochastic=True)
-    # dqn_1.set_loger('huber_log_dqn_1_no_per.csv')
-    # dqn_1.train_agent(episodes=1, epsilon=0.6, discount_factor=0.9)
-    # dqn_1.q_model.save(r'C:\Users\HP\Desktop\Finale\reinforcement_learning_final\weights\ex1_w\dqn_1_no_per')
-    # while (np.average(dqn_1.steps_taken[-5:]) < 50 and len(dqn_1.steps_taken) < episodes_to_learn):
-    #     dqn_1.train_agent(episodes=5, epsilon=dqn_1.epsilon, discount_factor=dqn_1.discount_factor)
-    # print(f'Total episodes: {len(dqn_1.steps_taken)}')
-    # loss_dqn_1 = np.flip(pd.read_csv('huber_log_dqn_1_no_per.csv', delimiter=';').loss.to_numpy())
-    # quantile_95 = np.quantile(loss_dqn_1, 0.95)
-    # loss_dqn_1 = np.arange(len(loss_dqn_1[np.where(loss_dqn_1 < quantile_95)])), loss_dqn_1[
-    #     np.where(loss_dqn_1 < quantile_95)]
-    # np.savetxt("loss_dqn_1_no_per.csv", loss_dqn_1, delimiter=",")
-    # dqn_1_actions_taken = np.array(dqn_1.steps_taken)
-    # np.savetxt("dqn_1_actions_taken_no_per.csv", dqn_1_actions_taken, delimiter=",")
-    # dqn_1_reward_eval = np.array(dqn_1.reward_eval)
-    # np.savetxt("dqn_1_reward_eval_no_per.csv", dqn_1_reward_eval, delimiter=",")
-    #
-    #
-    # ddqn_2=Agent(model_type='ddqn', betches_size=100, sync_models=50, per=True, env_number=2, is_stochastic=False)
-    # ddqn_2.set_loger('huber_log_ddqn_2.csv')
-    # ddqn_2.train_agent(episodes=1, epsilon=0.6, discount_factor=0.9)
-    # while (np.average(ddqn_2.steps_taken[-5:]) < 50 and len(ddqn_2.steps_taken) < episodes_to_learn):
-    #     ddqn_2.train_agent(episodes=5, epsilon=ddqn_2.epsilon, discount_factor=ddqn_2.discount_factor)
-    # ddqn_2.q_model.save(r'C:\Users\HP\Desktop\Finale\reinforcement_learning_final\weights\ex2_w\ddqn_2')
-    # print(f'Total episodes: {len(ddqn_2.steps_taken)}')
-    # loss_ddqn_2 = np.flip(pd.read_csv('huber_log_ddqn_2.csv', delimiter=';').loss.to_numpy())
-    # quantile_95 = np.quantile(loss_ddqn_2, 0.95)
-    # loss_ddqn_2 = np.arange(len(loss_ddqn_2[np.where(loss_ddqn_2 < quantile_95)])), loss_ddqn_2[np.where(loss_ddqn_2 < quantile_95)]
-    # np.savetxt("loss_ddqn_2.csv", loss_ddqn_2, delimiter=",")
-    # ddqn_2_actions_taken = np.array(ddqn_2.steps_taken)
-    # np.savetxt("ddqn_2_actions_taken.csv", ddqn_2_actions_taken, delimiter=",")
-    # ddqn_2_reward_eval = np.array(ddqn_2.reward_eval)
-    # np.savetxt("ddqn_2_reward_eval.csv", ddqn_2_reward_eval, delimiter=",")
-    #
-    # dqn_2 = Agent(model_type='dqn', betches_size=100, sync_models=50, per=True, env_number=2, is_stochastic=False)
-    # dqn_2.set_loger('huber_log_dqn_2.csv')
-    # dqn_2.train_agent(episodes=1, epsilon=0.6, discount_factor=0.9)
-    # ddqn_2.q_model.save(r'C:\Users\HP\Desktop\Finale\reinforcement_learning_final\weights\ex2_w\dqn_2')
-    # while (np.average(dqn_2.steps_taken[-5:]) < 50 and len(dqn_2.steps_taken) < episodes_to_learn):
-    #     dqn_2.train_agent(episodes=5, epsilon=dqn_2.epsilon, discount_factor=dqn_2.discount_factor)
-    # print(f'Total episodes: {len(dqn_2.steps_taken)}')
-    # loss_dqn_2 = np.flip(pd.read_csv('huber_log_dqn_2.csv', delimiter=';').loss.to_numpy())
-    # quantile_95 = np.quantile(loss_dqn_2, 0.95)
-    # loss_dqn_2 = np.arange(len(loss_dqn_2[np.where(loss_dqn_2 < quantile_95)])), loss_dqn_2[
-    #     np.where(loss_dqn_2 < quantile_95)]
-    # np.savetxt("loss_dqn_2.csv", loss_dqn_2, delimiter=",")
-    # dqn_2_actions_taken = np.array(dqn_2.steps_taken)
-    # np.savetxt("dqn_2_actions_taken.csv", dqn_2_actions_taken, delimiter=",")
-    # dqn_2_reward_eval = np.array(dqn_2.reward_eval)
-    # np.savetxt("dqn_2_reward_eval.csv", dqn_2_reward_eval, delimiter=",")
-    #
-    # ddqn_2=Agent(model_type='ddqn', betches_size=100, sync_models=50, per=False, env_number=2, is_stochastic=False)
-    # ddqn_2.set_loger('huber_log_ddqn_2_no_per.csv')
-    # ddqn_2.train_agent(episodes=1, epsilon=0.6, discount_factor=0.9)
-    # dqn_2.q_model.save(r'C:\Users\HP\Desktop\Finale\reinforcement_learning_final\weights\ex2_w\ddqn_2_no_per')
-    # while (np.average(ddqn_2.steps_taken[-5:]) < 50 and len(ddqn_2.steps_taken) < episodes_to_learn):
-    #     ddqn_2.train_agent(episodes=5, epsilon=ddqn_2.epsilon, discount_factor=ddqn_2.discount_factor)
-    # print(f'Total episodes: {len(ddqn_2.steps_taken)}')
-    # loss_ddqn_2 = np.flip(pd.read_csv('huber_log_ddqn_2_no_per.csv', delimiter=';').loss.to_numpy())
-    # quantile_95 = np.quantile(loss_ddqn_2, 0.95)
-    # loss_ddqn_2 = np.arange(len(loss_ddqn_2[np.where(loss_ddqn_2 < quantile_95)])), loss_ddqn_2[np.where(loss_ddqn_2 < quantile_95)]
-    # np.savetxt("loss_ddqn_2_no_per.csv", loss_ddqn_2, delimiter=",")
-    # ddqn_2_actions_taken = np.array(ddqn_2.steps_taken)
-    # np.savetxt("ddqn_2_actions_taken_no_per.csv", ddqn_2_actions_taken, delimiter=",")
-    # ddqn_2_reward_eval = np.array(ddqn_2.reward_eval)
-    # np.savetxt("ddqn_2_reward_eval_no_per.csv", ddqn_2_reward_eval, delimiter=",")
-    #
-    # dqn_2 = Agent(model_type='dqn', betches_size=100, sync_models=50, per=False, env_number=2, is_stochastic=False)
-    # dqn_2.set_loger('huber_log_dqn_2_no_per.csv')
-    # dqn_2.train_agent(episodes=1, epsilon=0.6, discount_factor=0.9)
-    # dqn_2.q_model.save(r'C:\Users\HP\Desktop\Finale\reinforcement_learning_final\weights\ex2_w\dqn_2_no_per')
-    # while (np.average(dqn_2.steps_taken[-5:]) < 50 and len(dqn_2.steps_taken) < episodes_to_learn):
-    #     dqn_2.train_agent(episodes=5, epsilon=dqn_2.epsilon, discount_factor=dqn_2.discount_factor)
-    # print(f'Total episodes: {len(dqn_2.steps_taken)}')
-    # loss_dqn_2 = np.flip(pd.read_csv('huber_log_dqn_2_no_per.csv', delimiter=';').loss.to_numpy())
-    # quantile_95 = np.quantile(loss_dqn_2, 0.95)
-    # loss_dqn_2 = np.arange(len(loss_dqn_2[np.where(loss_dqn_2 < quantile_95)])), loss_dqn_2[
-    #     np.where(loss_dqn_2 < quantile_95)]
-    # np.savetxt("loss_dqn_2_no_per.csv", loss_dqn_2, delimiter=",")
-    # dqn_2_actions_taken = np.array(dqn_2.steps_taken)
-    # np.savetxt("dqn_2_actions_taken_no_per.csv", dqn_2_actions_taken, delimiter=",")
-    # dqn_2_reward_eval = np.array(dqn_2.reward_eval)
-    # np.savetxt("dqn_2_reward_eval_no_per.csv", dqn_2_reward_eval, delimiter=",")
+
+    ddqn_1=Agent(model_type='ddqn', betches_size=100, sync_models=50, per=False, env_number=1, is_stochastic=True)
+    ddqn_1.set_loger('huber_log_ddqn_1_no_per.csv')
+    ddqn_1.train_agent(episodes=1, epsilon=0.6, discount_factor=0.9)
+
+    while (np.average(ddqn_1.steps_taken[-5:]) < 50 and len(ddqn_1.steps_taken) < episodes_to_learn):
+        ddqn_1.train_agent(episodes=5, epsilon=ddqn_1.epsilon, discount_factor=ddqn_1.discount_factor)
+    ddqn_1.q_model.save(r'C:\Users\HP\Desktop\Finale\reinforcement_learning_final\weights\ex1_w\ddqn_1_no_per')
+    print(f'Total episodes: {len(ddqn_1.steps_taken)}')
+    loss_ddqn_1 = np.flip(pd.read_csv('huber_log_ddqn_1_no_per.csv', delimiter=';').loss.to_numpy())
+    quantile_95 = np.quantile(loss_ddqn_1, 0.95)
+    loss_ddqn_1 = np.arange(len(loss_ddqn_1[np.where(loss_ddqn_1 < quantile_95)])), loss_ddqn_1[np.where(loss_ddqn_1 < quantile_95)]
+    np.savetxt("loss_ddqn_1_no_per.csv", loss_ddqn_1, delimiter=",")
+    ddqn_1_actions_taken = np.array(ddqn_1.steps_taken)
+    np.savetxt("ddqn_1_actions_taken_no_per.csv", ddqn_1_actions_taken, delimiter=",")
+    ddqn_1_reward_eval = np.array(ddqn_1.reward_eval)
+    np.savetxt("ddqn_1_reward_eval_no_per.csv", ddqn_1_reward_eval, delimiter=",")
+
+    dqn_1 = Agent(model_type='dqn', betches_size=100, sync_models=50, per=False, env_number=1, is_stochastic=True)
+    dqn_1.set_loger('huber_log_dqn_1_no_per.csv')
+    dqn_1.train_agent(episodes=1, epsilon=0.6, discount_factor=0.9)
+
+    while (np.average(dqn_1.steps_taken[-5:]) < 50 and len(dqn_1.steps_taken) < episodes_to_learn):
+        dqn_1.train_agent(episodes=5, epsilon=dqn_1.epsilon, discount_factor=dqn_1.discount_factor)
+    dqn_1.q_model.save(r'C:\Users\HP\Desktop\Finale\reinforcement_learning_final\weights\ex1_w\dqn_1_no_per')
+    print(f'Total episodes: {len(dqn_1.steps_taken)}')
+    loss_dqn_1 = np.flip(pd.read_csv('huber_log_dqn_1_no_per.csv', delimiter=';').loss.to_numpy())
+    quantile_95 = np.quantile(loss_dqn_1, 0.95)
+    loss_dqn_1 = np.arange(len(loss_dqn_1[np.where(loss_dqn_1 < quantile_95)])), loss_dqn_1[
+        np.where(loss_dqn_1 < quantile_95)]
+    np.savetxt("loss_dqn_1_no_per.csv", loss_dqn_1, delimiter=",")
+    dqn_1_actions_taken = np.array(dqn_1.steps_taken)
+    np.savetxt("dqn_1_actions_taken_no_per.csv", dqn_1_actions_taken, delimiter=",")
+    dqn_1_reward_eval = np.array(dqn_1.reward_eval)
+    np.savetxt("dqn_1_reward_eval_no_per.csv", dqn_1_reward_eval, delimiter=",")
+
+
+    ddqn_2=Agent(model_type='ddqn', betches_size=100, sync_models=50, per=True, env_number=2, is_stochastic=False)
+    ddqn_2.set_loger('huber_log_ddqn_2.csv')
+    ddqn_2.train_agent(episodes=1, epsilon=0.6, discount_factor=0.9)
+    while (np.average(ddqn_2.steps_taken[-5:]) < 50 and len(ddqn_2.steps_taken) < episodes_to_learn):
+        ddqn_2.train_agent(episodes=5, epsilon=ddqn_2.epsilon, discount_factor=ddqn_2.discount_factor)
+    ddqn_2.q_model.save(r'C:\Users\HP\Desktop\Finale\reinforcement_learning_final\weights\ex2_w\ddqn_2')
+    print(f'Total episodes: {len(ddqn_2.steps_taken)}')
+    loss_ddqn_2 = np.flip(pd.read_csv('huber_log_ddqn_2.csv', delimiter=';').loss.to_numpy())
+    quantile_95 = np.quantile(loss_ddqn_2, 0.95)
+    loss_ddqn_2 = np.arange(len(loss_ddqn_2[np.where(loss_ddqn_2 < quantile_95)])), loss_ddqn_2[np.where(loss_ddqn_2 < quantile_95)]
+    np.savetxt("loss_ddqn_2.csv", loss_ddqn_2, delimiter=",")
+    ddqn_2_actions_taken = np.array(ddqn_2.steps_taken)
+    np.savetxt("ddqn_2_actions_taken.csv", ddqn_2_actions_taken, delimiter=",")
+    ddqn_2_reward_eval = np.array(ddqn_2.reward_eval)
+    np.savetxt("ddqn_2_reward_eval.csv", ddqn_2_reward_eval, delimiter=",")
+
+    dqn_2 = Agent(model_type='dqn', betches_size=100, sync_models=50, per=True, env_number=2, is_stochastic=False)
+    dqn_2.set_loger('huber_log_dqn_2.csv')
+    dqn_2.train_agent(episodes=1, epsilon=0.6, discount_factor=0.9)
+
+    while (np.average(dqn_2.steps_taken[-5:]) < 50 and len(dqn_2.steps_taken) < episodes_to_learn):
+        dqn_2.train_agent(episodes=5, epsilon=dqn_2.epsilon, discount_factor=dqn_2.discount_factor)
+    dqn_2.q_model.save(r'C:\Users\HP\Desktop\Finale\reinforcement_learning_final\weights\ex2_w\dqn_2')
+    print(f'Total episodes: {len(dqn_2.steps_taken)}')
+    loss_dqn_2 = np.flip(pd.read_csv('huber_log_dqn_2.csv', delimiter=';').loss.to_numpy())
+    quantile_95 = np.quantile(loss_dqn_2, 0.95)
+    loss_dqn_2 = np.arange(len(loss_dqn_2[np.where(loss_dqn_2 < quantile_95)])), loss_dqn_2[
+        np.where(loss_dqn_2 < quantile_95)]
+    np.savetxt("loss_dqn_2.csv", loss_dqn_2, delimiter=",")
+    dqn_2_actions_taken = np.array(dqn_2.steps_taken)
+    np.savetxt("dqn_2_actions_taken.csv", dqn_2_actions_taken, delimiter=",")
+    dqn_2_reward_eval = np.array(dqn_2.reward_eval)
+    np.savetxt("dqn_2_reward_eval.csv", dqn_2_reward_eval, delimiter=",")
+
+    ddqn_2=Agent(model_type='ddqn', betches_size=100, sync_models=50, per=False, env_number=2, is_stochastic=False)
+    ddqn_2.set_loger('huber_log_ddqn_2_no_per.csv')
+    ddqn_2.train_agent(episodes=1, epsilon=0.6, discount_factor=0.9)
+
+    while (np.average(ddqn_2.steps_taken[-5:]) < 50 and len(ddqn_2.steps_taken) < episodes_to_learn):
+        ddqn_2.train_agent(episodes=5, epsilon=ddqn_2.epsilon, discount_factor=ddqn_2.discount_factor)
+    ddqn_2.q_model.save(r'C:\Users\HP\Desktop\Finale\reinforcement_learning_final\weights\ex2_w\ddqn_2_no_per')
+    print(f'Total episodes: {len(ddqn_2.steps_taken)}')
+    loss_ddqn_2 = np.flip(pd.read_csv('huber_log_ddqn_2_no_per.csv', delimiter=';').loss.to_numpy())
+    quantile_95 = np.quantile(loss_ddqn_2, 0.95)
+    loss_ddqn_2 = np.arange(len(loss_ddqn_2[np.where(loss_ddqn_2 < quantile_95)])), loss_ddqn_2[np.where(loss_ddqn_2 < quantile_95)]
+    np.savetxt("loss_ddqn_2_no_per.csv", loss_ddqn_2, delimiter=",")
+    ddqn_2_actions_taken = np.array(ddqn_2.steps_taken)
+    np.savetxt("ddqn_2_actions_taken_no_per.csv", ddqn_2_actions_taken, delimiter=",")
+    ddqn_2_reward_eval = np.array(ddqn_2.reward_eval)
+    np.savetxt("ddqn_2_reward_eval_no_per.csv", ddqn_2_reward_eval, delimiter=",")
+
+    dqn_2 = Agent(model_type='dqn', betches_size=100, sync_models=50, per=False, env_number=2, is_stochastic=False)
+    dqn_2.set_loger('huber_log_dqn_2_no_per.csv')
+    dqn_2.train_agent(episodes=1, epsilon=0.6, discount_factor=0.9)
+
+    while (np.average(dqn_2.steps_taken[-5:]) < 50 and len(dqn_2.steps_taken) < episodes_to_learn):
+        dqn_2.train_agent(episodes=5, epsilon=dqn_2.epsilon, discount_factor=dqn_2.discount_factor)
+    dqn_2.q_model.save(r'C:\Users\HP\Desktop\Finale\reinforcement_learning_final\weights\ex2_w\dqn_2_no_per')
+    print(f'Total episodes: {len(dqn_2.steps_taken)}')
+    loss_dqn_2 = np.flip(pd.read_csv('huber_log_dqn_2_no_per.csv', delimiter=';').loss.to_numpy())
+    quantile_95 = np.quantile(loss_dqn_2, 0.95)
+    loss_dqn_2 = np.arange(len(loss_dqn_2[np.where(loss_dqn_2 < quantile_95)])), loss_dqn_2[
+        np.where(loss_dqn_2 < quantile_95)]
+    np.savetxt("loss_dqn_2_no_per.csv", loss_dqn_2, delimiter=",")
+    dqn_2_actions_taken = np.array(dqn_2.steps_taken)
+    np.savetxt("dqn_2_actions_taken_no_per.csv", dqn_2_actions_taken, delimiter=",")
+    dqn_2_reward_eval = np.array(dqn_2.reward_eval)
+    np.savetxt("dqn_2_reward_eval_no_per.csv", dqn_2_reward_eval, delimiter=",")
 
 
 
